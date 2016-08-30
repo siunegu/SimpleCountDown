@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Countdown clock</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Library specific */
+    .countdown-clock {
+      background-color: #efefef;
+      height: 50px;
+      width:  400px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 10px;
+    }
+    .countdown-clock-ticker {
+      height: 50px;
+      width: 50px;
+      vertical-align: middle;
+      line-height: 50px;
+      outline: 1px solid #aeaeae;
+      display: inline-block;
+      margin: 0 5px;
+    }
+    .countdown-clock-ticker__field {
+      display: inline-block;
+    }
+
+    /* Your own code */
+    #clock {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      display: table;
+      height: auto;
+
+      transform: scale(1.8);
+    }
+  </style>
+</head>
+<body>
+  <div id="clock"></div>
+
+  <script src="CountdownClock.js" type="text/javascript"></script>
+</body>
+</html>
