@@ -6,7 +6,7 @@
  * @author: Eugene Lai
 
  */
- 
+
 var CountdownClock = CountdownClock || {};
 CountdownClock
 = (function(window) {
@@ -18,9 +18,14 @@ CountdownClock
  * @param {string} endDate - endDate format: eg. 'September 01 2016' otherwise takes epoch time.
  */
   function CountdownClock( domSelector, endDate ) {
-    this.domElement = document.querySelector(domSelector)
-    this.epoch      = false;
-    this.endDate    = endDate;
+    this.domSelector = domSelector
+    this.domElement  = (function() {
+      var div = document.createElement('div')
+      div.setAttribute('id', 'countdown-clock')
+      return ( div )
+    })()
+    this.epoch       = false;
+    this.endDate     = endDate;
 
     if ( ( String(endDate).match(/[0-9]{0,10}/)[0].length >= 10 ) ) {
       this.epoch = true;
@@ -33,7 +38,7 @@ CountdownClock
     init: function() {
       var div,
           timeField, timeFieldLabel;
-
+          console.log(this.domElement)
       for (var i = 0; i < 4; i ++) {
         div = document.createElement('div')
         div.setAttribute('class', 'countdown-clock-ticker')
@@ -50,7 +55,7 @@ CountdownClock
       }
 
       this.domElement.setAttribute('class', 'countdown-clock')
-      document.body.appendChild(this.domElement)
+      document.querySelector(this.domSelector).appendChild(this.domElement)
 
       return this
     },
@@ -111,8 +116,7 @@ CountdownClock
 /* Execute */
 var clock
 
-// clock = new CountdownClock('#clock', 'September 01 2016')
-clock = new CountdownClock('#clock', 1472652000)
+clock = new CountdownClock('.clock', 'September 12 2016')
 clock.init()
      .tick()
      .setLabels()
