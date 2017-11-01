@@ -68,16 +68,20 @@ CountdownClock
           return ( Date.parse(endtime) - Date.parse(new Date()) )
         }
       }.bind(this))()
+
+      if (t < 0) t = 0;
+
       var seconds = Math.floor( (t/1000) % 60 );
       var minutes = Math.floor( (t/1000/60) % 60 );
       var hours = Math.floor( (t/(1000*60*60)) % 24 );
       var days = Math.floor( t/(1000*60*60*24) );
+
       return {
         'total': t,
-        'days': days,
-        'hours': hours,
-        'minutes': minutes,
-        'seconds': seconds
+        'days': days < 10 ? '0' + days : days,
+        'hours': hours < 10 ? '0' + hours : hours,
+        'minutes': minutes < 10 ? '0' + minutes : minutes,
+        'seconds': seconds < 10 ? '0' + seconds : seconds
       };
     },
     setLabels: function() {
@@ -85,10 +89,11 @@ CountdownClock
       var hoursLabelHTML   = document.querySelectorAll('.countdown-clock-ticker__field-label')[1]
       var minutesLabelHTML = document.querySelectorAll('.countdown-clock-ticker__field-label')[2]
       var secondsLabelHTML = document.querySelectorAll('.countdown-clock-ticker__field-label')[3]
-      daysLabelHTML.innerText = 'days'
-      hoursLabelHTML.innerText = 'hours'
-      minutesLabelHTML.innerText = 'minutes'
-      secondsLabelHTML.innerText = 'seconds'
+
+      daysLabelHTML.innerText = 'D'
+      hoursLabelHTML.innerText = 'H'
+      minutesLabelHTML.innerText = 'M'
+      secondsLabelHTML.innerText = 'S'
 
       return this
     },
@@ -97,6 +102,7 @@ CountdownClock
       this.hoursHTML   = document.querySelectorAll('.countdown-clock-ticker__field')[1]
       this.minutesHTML = document.querySelectorAll('.countdown-clock-ticker__field')[2]
       this.secondsHTML = document.querySelectorAll('.countdown-clock-ticker__field')[3]
+
       setInterval(function() {
         this.daysHTML.innerText = this.getTimeRemaining( new Date(this.endDate) ).days
         this.hoursHTML.innerText = this.getTimeRemaining( new Date(this.endDate) ).hours
@@ -116,7 +122,7 @@ CountdownClock
 /* Execute */
 var clock
 
-clock = new CountdownClock('.clock', 'September 12 2016')
+clock = new CountdownClock('#clock', 'December 7 2017')
 clock.init()
      .tick()
      .setLabels()
